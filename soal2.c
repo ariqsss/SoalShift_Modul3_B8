@@ -29,11 +29,15 @@ void *tebak(void *arg){
  int *map=arg;
  int dmn;
  int player2;
+ int a[17]; memset(a,0,sizeof(a));
  player2=(player==0)?1:0; 
  for (int i=0; i < 4 ; ++i){
- scanf("%d",&dmn);
- if (map[dmn]==1) ++score[player];
- else ++score[player2];
+ 
+ scanf("%d",&dmn);while(a[dmn]!=0) {printf("Jangan milih yang sama dong!\n"); scanf("%d",&dmn);}
+ //a[dmn]=1;
+ if (map[dmn]==1) ++score[player]; //klo salah nebak lawan kasih point soalnya sebelum dipangil kan player masih nilai gilirannya
+ else { ++score[player2]; a[dmn]=1;}
+	if (score[0]>10 ||score[1]>10) break;
  }
 
 }
@@ -49,7 +53,7 @@ printf("Nama player2 : "); scanf("%s",b);
 player=0;
 score[0]=0; score[1]=0;
 mine[0]=0; mine[1]=0;
- while((score[0]!=10 || score[1]!=10)||(mine[0]!=10 && mine[1]!=10)){
+ while(1){
 	if (player==0){
 	printf("Giliran %s memasang ranjau\n",a);
 	pthread_create(&(tid[0]),NULL,&pasang,(void *)&map1);
@@ -74,10 +78,13 @@ mine[0]=0; mine[1]=0;
 	for (int i=0; i<17 ; ++i ) printf("%d ",map1[i]); printf("\n");
 	for (int i=0; i<17 ; ++i ) printf("%d ",map2[i]);
 	printf("\n ------------------------ \n");
-*/
-	printf("Score saat ini player1 : player2\n");
-	printf("                  %d   :    %d\n",score[0],score[1]);
-
+*/	printf("\n\n-----------------\n");
+	printf("  Score saat ini\n");
+	printf("player1 : player2\n");
+	printf("   %d   :    %d\n",score[0],score[1]);
+	printf("-----------------\n\n");
+	
+	if ((score[0]>10 || score[1]>10) || (mine[0]!=16 && mine[1]!=16))break;
  }
  if (score[0]==10) printf("%s menang!\n",a);
  else if (score[1]==10) printf("%s menang!\n",b);
