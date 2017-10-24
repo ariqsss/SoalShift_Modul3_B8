@@ -71,7 +71,7 @@ while(1){
 }
 }
 
-
+//
 shmdt(value);
 //shmct1(shmid, IPC_RMID , NULL);
 return 0;
