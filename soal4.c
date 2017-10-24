@@ -4,7 +4,7 @@
 
 
 pthread_t tid[100];
-
+//
 void *faktor(void *arg){
  int *a=(int *)arg;
  int b=1;
