@@ -13,14 +13,14 @@ void *faktor(void *arg){
  }
  printf("Hasil %d! = %d\n",*a,b);
 }
-
+//
 
 int main(int argc, char *argv[]){
 
-int target[100],max=0,j;
+int target[100];//,max=0,j;
 for (int i=1 ; i <argc ; ++i){
  target[i]=atoi(argv[i]);
- if(target[i]>max){ max=target[i]; j=i;}
+ //if(target[i]>max){ max=target[i]; j=i;}
 // //printf("%s %d\n",argv[i],target[i]);
  pthread_create(&(tid[i]),NULL,&faktor,(void *)&target[i]);
 }
