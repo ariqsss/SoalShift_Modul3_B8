@@ -4,7 +4,7 @@
 #include<stdlib.h>
 #include<unistd.h>
 
-pthread_tid[5];
+pthread_t tid[5];
 int L=100,K=100;
 void* kolamku(void *arg)       
 {
@@ -13,6 +13,20 @@ void* kolamku(void *arg)
    int iter;
    if(pthread_equal(id,tid[0]))       
    {
+	while(1){
+		//system("clear");
+		if( L>0&&L<=100&&K>0&&K<=100 ){
+		pthread_create(&(tid[4]), NULL, &kolamku, NULL);
+		sleep(3);
+		L=L-15;
+		pthread_create(&(tid[4]), NULL, &kolamku, NULL);
+		sleep(3);
+		L=L-15;
+		K=K-10;
+	}
+	else {printf("game over");exit(EXIT_SUCCESS);}
+		
+	}
   
    }
    
@@ -25,11 +39,14 @@ void* kolamku(void *arg)
       }
    else if(pthread_equal(id,tid[3]))       
    {
-   
+        
      }
    else if(pthread_equal(id,tid[4]))       
-   {
-
+   {    system("clear");
+	if(L>0&&L<=100&&K>0&&K<=100){
+	printf("Health point lohan : %d  Health point Kepiting : %d \n",L,K);
+	}
+	//else if(L<=0||L>100||K<=0||K>100){ printf ("Game Over !"); return NULL;}	
    }
    return NULL;
 }
@@ -41,26 +58,26 @@ int main(void)
    char command[100];
    char argument[100];
    
-   while((L>0&&L<=100&&K>0&&K<=100)           
+   while(L>0&&L<=100&&K>0&&K<=100)           
    {
    
    scanf("%s%s",command,argument);
    printf("%s %s",command,argument);
    if(strcmp(command,"init")==0){
-      err = pthread_create(&(tid[0]), NULL, &playAndCount, (void*)argument);   
+      err = pthread_create(&(tid[0]), NULL, &kolamku, (void*)argument);   
 
    }
    else if(strcmp(command,"help")==0){
-      err = pthread_create(&(tid[1]), NULL, &playAndCount, (void*)argument);   
+      err = pthread_create(&(tid[1]), NULL, &kolamku, (void*)argument);   
    }
    else if(strcmp(command,"beri_makan")==0){
-      err = pthread_create(&(tid[2]), NULL, &playAndCount, (void*)argument);   
+      err = pthread_create(&(tid[2]), NULL, &kolamku, (void*)argument);   
    }
    else if(strcmp(command,"pause")==0){
-     err = pthread_create(&(tid[3]), NULL, &playAndCount, (void*)argument);
+     err = pthread_create(&(tid[3]), NULL, &kolamku, (void*)argument);
    }
    else if(strcmp(command,"continue")==0){
-     err = pthread_create(&(tid[4]), NULL, &playAndCount, (void*)argument);
+     err = pthread_create(&(tid[4]), NULL, &kolamku, (void*)argument);
    }
    else if(strcmp(command,"quit")==0){
        break;
