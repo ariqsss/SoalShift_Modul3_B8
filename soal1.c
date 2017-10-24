@@ -27,7 +27,16 @@ void *beli(void *arg){
  }
 }
 
+void *show(void* arg){
+ for (int i=0 ; i< 6 ; ++i){
+	if (value[i]>0){
+	printf("%s %d\n",weapon[i],value[i]);
+	}
+  }
+}
+
 int main(){
+
 
 
 return 0;
