@@ -65,7 +65,7 @@ mine[0]=0; mine[1]=0;
 	printf("Giliran %s memasang ranjau\n",b);
 	pthread_create(&(tid[0]),NULL,&pasang,(void *)&map2);
 	pthread_join(tid[0],NULL);
-	printf("Saatnya %a menebak ranjau\n",a);
+	printf("Saatnya %s menebak ranjau\n",a);
 	pthread_create(&(tid[1]),NULL,&tebak,(void *)&map2);
 	pthread_join(tid[1],NULL);
 	player=0;
