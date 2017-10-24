@@ -84,7 +84,7 @@ mine[0]=0; mine[1]=0;
 	printf("   %d   :    %d\n",score[0],score[1]);
 	printf("-----------------\n\n");
 	
-	if ((score[0]>10 || score[1]>10) || (mine[0]!=16 && mine[1]!=16))break;
+	if ((score[0]>10 || score[1]>10) || (mine[0]==16 && mine[1]==16))break;
  }
  if (score[0]==10) printf("%s menang!\n",a);
  else if (score[1]==10) printf("%s menang!\n",b);
