@@ -2,27 +2,30 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <string.h>
+#include <unistd.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
+char weapon[7][10]; //LIST DAGANGAN
 
 
-char weapon[7][10];
-int value[7];
-
-void *beli(void *arg){
+void *tambah(void *arg){
  char x[10];
  int y;
+ int *a=(int *)arg;
  scanf("%s %d",x,&y);
  for (int i=0 ; i < 6 ; ++i){
   if(strcmp(weapon[i],x)==0){
- 	value[i]+=y;
+ 	a[i]+=y;
 	break;
   }
  }
 }
 
 void *show(void* arg){
+  int *a=(int *)arg;
  for (int i=0 ; i< 6 ; ++i){
-	if (value[i]>0){
-	printf("%s %d\n",weapon[i],value[i]);
+	if (a[i]>0){
+	printf("%s %d\n",weapon[i],a[i]);
 	}
   }
 }
@@ -32,7 +35,17 @@ void *menu(void* arg){
 }
 
 int main(){
-for(int i=0;i<7;++i)value[i]=0;
+
+key_t key;
+int *value;
+
+key=ftok("~/.bashrc",1);
+
+int shmid = shmget(key, sizeof(int)*7 , IPC_CREAT|0666);
+value=(int *)shmat(shmid,NULL,0);
+
+
+for (int i=0 ; i <7 ; ++i) value[i]=0;
 
 strcpy((weapon[0]),"MP4A1");
 strcpy(weapon[1],"PM2-V1");
@@ -49,16 +62,17 @@ while(1){
  pthread_join(tid[0],NULL);
  scanf("%s",option);
  if (strcmp(option,"lihat")==0){
-  pthread_create(&(tid[1]),NULL,&show,NULL);
+  pthread_create(&(tid[1]),NULL,&show,(void *)value);
   pthread_join(tid[1],NULL);	
  }
  else if (strcmp(option,"tambah")==0){
- pthread_create(&(tid[2]),NULL,&beli,NULL);
+ pthread_create(&(tid[2]),NULL,&tambah,(void *)value);
  pthread_join(tid[2],NULL);
 }
-
 }
 
-
+//
+shmdt(value);
+//shmct1(shmid, IPC_RMID , NULL);
 return 0;
 }
