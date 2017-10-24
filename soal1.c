@@ -7,7 +7,7 @@
 #include <sys/shm.h>
 char weapon[7][10]; //LIST DAGANGAN
 pthread_t tid[8];
-
+//
 void *tambah(void *arg){
  char x[10];
  int y;
