@@ -13,7 +13,7 @@ void *faktor(void *arg){
  }
  printf("Hasil %d! = %d\n",*a,b);
 }
-
+//
 
 int main(int argc, char *argv[]){
 
