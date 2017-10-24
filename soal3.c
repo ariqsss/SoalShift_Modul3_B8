@@ -8,28 +8,27 @@ pthread_t tid[5];
 int L=100,K=100;
 void* kolamku(void *arg)       
 {
+   int j;
    unsigned long i = 0;
    pthread_t id = pthread_self();
    int iter;
    if(pthread_equal(id,tid[0]))       
    {
 	while(1){
-		if((L<=0)&&(L>100)&&(K<=0)&&(K>100)){printf("game over");exit(EXIT_SUCCESS);}
+		if(((L<=0)&&(L>100))&&((K<=0)&&(K>100))){printf("game over");exit(EXIT_SUCCESS);}
 		//system("clear");
-		else if( (L>0)&&(L<=100)&&(K>0)&&(K<=100) ){
+		else if( ((L>0)&&(L<=100))&&((K>0)&&(K<=100)) ){
 		pthread_create(&(tid[4]), NULL, &kolamku, NULL);
 		sleep(10);
-		if((L<=0)&&(L>100)&&(K<=0)&&(K>100)){printf("game over");exit(EXIT_SUCCESS);}
+		if(((L<=0)&&(L>100))&&((K<=0)&&(K>100))){printf("game over");exit(EXIT_SUCCESS);}
 		L=L-15;
-		if((L<=0)&&(L>100)&&(K<=0)&&(K>100)){printf("game over");exit(EXIT_SUCCESS);}
 		pthread_create(&(tid[4]), NULL, &kolamku, NULL);
-		if((L<=0)&&(L>100)&&(K<=0)&&(K>100)){printf("game over");exit(EXIT_SUCCESS);}
 		sleep(10);
-		if((L<=0)&&(L>100)&&(K<=0)&&(K>100)){printf("game over");exit(EXIT_SUCCESS);}
-		L=L-15;
-		if((L<=0)&&(L>100)&&(K<=0)&&(K>100)){printf("game over");exit(EXIT_SUCCESS);}
+		if(((L<=0)&&(L>100))&&((K<=0)&&(K>100))){printf("game over");exit(EXIT_SUCCESS);}
+               	L=L-15;
 		K=K-10;
-		if((L<=0)&&(L>100)&&(K<=0)&&(K>100)){printf("game over");exit(EXIT_SUCCESS);}
+		pthread_create(&(tid[4]), NULL, &kolamku, NULL);
+
 	}
 	else {printf("game over");exit(EXIT_SUCCESS);}
 		
@@ -72,8 +71,7 @@ int main(void)
    int err;
    char command[100];
    char argument[100];
-   
-   while(L>0&&L<=100&&K>0&&K<=100)           
+   while((L>0)&&(L<=100)&&(K>0)&&(K<=100))           
    {
    
    scanf("%s%s",command,argument);
