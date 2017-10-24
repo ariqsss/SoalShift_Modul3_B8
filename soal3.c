@@ -14,15 +14,22 @@ void* kolamku(void *arg)
    if(pthread_equal(id,tid[0]))       
    {
 	while(1){
+		if((L<=0)&&(L>100)&&(K<=0)&&(K>100)){printf("game over");exit(EXIT_SUCCESS);}
 		//system("clear");
-		if( L>0&&L<=100&&K>0&&K<=100 ){
+		else if( (L>0)&&(L<=100)&&(K>0)&&(K<=100) ){
 		pthread_create(&(tid[4]), NULL, &kolamku, NULL);
-		sleep(3);
+		sleep(10);
+		if((L<=0)&&(L>100)&&(K<=0)&&(K>100)){printf("game over");exit(EXIT_SUCCESS);}
 		L=L-15;
+		if((L<=0)&&(L>100)&&(K<=0)&&(K>100)){printf("game over");exit(EXIT_SUCCESS);}
 		pthread_create(&(tid[4]), NULL, &kolamku, NULL);
-		sleep(3);
+		if((L<=0)&&(L>100)&&(K<=0)&&(K>100)){printf("game over");exit(EXIT_SUCCESS);}
+		sleep(10);
+		if((L<=0)&&(L>100)&&(K<=0)&&(K>100)){printf("game over");exit(EXIT_SUCCESS);}
 		L=L-15;
+		if((L<=0)&&(L>100)&&(K<=0)&&(K>100)){printf("game over");exit(EXIT_SUCCESS);}
 		K=K-10;
+		if((L<=0)&&(L>100)&&(K<=0)&&(K>100)){printf("game over");exit(EXIT_SUCCESS);}
 	}
 	else {printf("game over");exit(EXIT_SUCCESS);}
 		
@@ -32,10 +39,18 @@ void* kolamku(void *arg)
    
    else if(pthread_equal(id,tid[1]))       
    {
-   
+	printf("\nuntuk memulai game ketik init awal\nuntuk bantuan ketik help 1\nuntuk beri makan hewan formatnya beri_makan < hewan >  cth: beri_makan lohan\n");   
    }
    else if(pthread_equal(id,tid[2]))       
-   {   
+   {   if(strcmp((char*)arg,"lohan")==0){
+       L=L+10;
+	pthread_create(&(tid[4]), NULL, &kolamku, NULL);
+   }
+	else if(strcmp((char*)arg,"kepiting")==0){
+       K=K+10;
+	pthread_create(&(tid[4]), NULL, &kolamku, NULL);
+   }
+
       }
    else if(pthread_equal(id,tid[3]))       
    {
@@ -43,8 +58,8 @@ void* kolamku(void *arg)
      }
    else if(pthread_equal(id,tid[4]))       
    {    system("clear");
-	if(L>0&&L<=100&&K>0&&K<=100){
-	printf("Health point lohan : %d  Health point Kepiting : %d \n",L,K);
+	if((L>0)&&(L<=100)&&(K>0)&&(K<=100)){
+	printf("status lohan : %d  status kepiting : %d \n",L,K);
 	}
 	//else if(L<=0||L>100||K<=0||K>100){ printf ("Game Over !"); return NULL;}	
    }
