@@ -5,7 +5,7 @@
 #include<unistd.h>
 
 pthread_t tid[5];
-int L=100,K=100;
+int L=100,K=100;//deklarasi untuk status awal Lohan dan Kepiting
 void* kolamku(void *arg)       
 {
    int j;
@@ -39,11 +39,11 @@ void* kolamku(void *arg)
    }
 ////////////////diatas ini merupakan Fungsi dari tampilan awal game agar lebih mudah bagi pengguna
    else if(pthread_equal(id,tid[2]))       
-   {   if(strcmp((char*)arg,"lohan")==0){
+   {   if((strcmp((char*)arg,"lohan")==0)||(strcmp((char*)arg,"Lohan")==0)){
        L=L+10;
 	pthread_create(&(tid[4]), NULL, &kolamku, NULL);
    }
-	else if(strcmp((char*)arg,"kepiting")==0){
+	else if((strcmp((char*)arg,"kepiting")==0)||(strcmp((char*)arg,"Kepiting")==0)){
        K=K+10;
 	pthread_create(&(tid[4]), NULL, &kolamku, NULL);
    }
@@ -59,7 +59,7 @@ void* kolamku(void *arg)
    else if(pthread_equal(id,tid[4]))       
    {    system("clear");
 	if((L>0)&&(L<=100)&&(K>0)&&(K<=100)){
-	printf("status lohan : %d  status kepiting : %d \n",L,K);
+	printf("status Lohan : %d  status Kepiting : %d \n",L,K);
 	}
    }
 //////////////////diatas ini merupakan fungsi untuk mengeprint status dari lohan dan kepiting saat ini
